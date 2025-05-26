@@ -11,6 +11,8 @@ export default function Home() {
           <Link to="/" className="text-blue-700 hover:underline">Home</Link>
           <Link to="/forum" className="text-blue-700 hover:underline">Forum</Link>
           <Link to="/therapy" className="text-blue-700 hover:underline">Therapy</Link>
+          <Link to="/meditation" className="text-blue-700 hover:underline">Meditation</Link>
+          <Link to="/mood" className="text-blue-700 hover:underline">Mood</Link>
           <Link to="/profile" className="text-blue-700 hover:underline">Profile</Link>
           <button
             onClick={() => {
@@ -29,9 +31,9 @@ export default function Home() {
           Welcome to <span className="text-purple-600">MindMatter</span>
         </h2>
         <p className="text-lg md:text-xl text-gray-700 max-w-xl mx-auto">
-          Your mental wellness journey starts here. Explore personalized therapy, engage in community forums, and track your progress.
+          Your mental wellness journey starts here. Explore personalized therapy, engage in community forums, meditate mindfully, and track your emotional well-being.
         </p>
-        <div className="mt-10 flex gap-4 justify-center">
+        <div className="mt-10 flex flex-wrap gap-4 justify-center">
           <Link
             to="/therapy"
             className="bg-purple-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-purple-700 transition shadow"
@@ -43,6 +45,18 @@ export default function Home() {
             className="bg-white border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg text-lg hover:bg-purple-100 transition shadow"
           >
             Visit Forum
+          </Link>
+          <Link
+            to="/meditation"
+            className="bg-green-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-600 transition shadow"
+          >
+            Meditation Sessions
+          </Link>
+          <Link
+            to="/mood"
+            className="bg-yellow-400 text-white px-6 py-3 rounded-lg text-lg hover:bg-yellow-500 transition shadow"
+          >
+            Track Mood
           </Link>
         </div>
       </main>

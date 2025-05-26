@@ -7,6 +7,8 @@ import Therapy from './pages/Therapy';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Meditation from "./pages/Meditation";
+import Mood from "./pages/Mood";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/meditation" element={<ProtectedRoute><Meditation /></ProtectedRoute>} />
+      <Route path="/mood" element={<ProtectedRoute><Mood /></ProtectedRoute>} />
 
       <Route
         path="/forum"
