@@ -3,13 +3,15 @@ const router = express.Router();
 const ForumPost = require('../models/ForumPost');
 const authMiddleware = require('../middleware/authMiddleware');
 
-// Create a forum post
+// POST /api/forum - Create a forum post with category
 router.post('/', authMiddleware, async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, category } = req.body;
+
     const newPost = new ForumPost({
       title,
       content,
+      category,
       createdBy: req.user.id,
     });
 
@@ -20,10 +22,13 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
-// Get all posts by logged-in user
+// GET /api/forum - Get all posts for logged-in user, optional category filter
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    const posts = await ForumPost.find({ createdBy: req.user.id }).sort({ createdAt: -1 });
+    const query = { createdBy: req.user.id };
+    if (req.query.category) query.category = req.query.category;
+
+    const posts = await ForumPost.find(query).sort({ createdAt: -1 });
     res.json(posts);
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });

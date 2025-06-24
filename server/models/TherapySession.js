@@ -1,23 +1,25 @@
-// models/TherapyBooking.js
 const mongoose = require('mongoose');
 
-const therapyBookingSchema = new mongoose.Schema({
-  userId: {
+const therapySessionSchema = new mongoose.Schema({
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  sessionId: {
-    type: Number, // or String if using custom IDs
+  therapist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Therapist',
     required: true,
   },
-  therapist: String,
-  title: String,
-  time: String,
-  bookedAt: {
-    type: Date,
-    default: Date.now,
+  date: {
+    type: String,
+    required: true,
   },
-});
+  timeSlot: {
+    type: String,
+    required: true,
+  },
+  notes: String,
+}, { timestamps: true });
 
-module.exports = mongoose.model('TherapyBooking', therapyBookingSchema);
+module.exports = mongoose.model('TherapySession', therapySessionSchema);

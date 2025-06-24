@@ -21,14 +21,17 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const moodRoutes = require('./routes/moodRoutes');
 const therapyRoutes = require('./routes/therapyRoutes');
+const therapistRoutes = require('./routes/therapistRoutes');
 const forumRoutes = require('./routes/forumRoutes');
 const meditationRoutes = require('./routes/meditationRoutes');
+
 
 // ✅ Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/mood', moodRoutes);
 app.use('/api/therapy', therapyRoutes);
+app.use('/api/therapists', therapistRoutes);
 app.use('/api/forum', forumRoutes);
 app.use('/api/meditation', meditationRoutes);
 

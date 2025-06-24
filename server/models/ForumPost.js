@@ -11,6 +11,11 @@ const forumPostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      enum: ['stress', 'wins', 'ask'],
+      default: 'stress',
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -18,7 +23,7 @@ const forumPostSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // automatically adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 

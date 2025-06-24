@@ -6,11 +6,13 @@ const authMiddleware = require('../middleware/authMiddleware');
 // Book a therapy session (POST)
 router.post('/', authMiddleware, async (req, res) => {
   try {
-    const { therapist, date, notes } = req.body;
+    const { therapistId, date, timeSlot, notes } = req.body;
+
     const session = new TherapySession({
       user: req.user.id,
-      therapist,
+      therapist: therapistId,
       date,
+      timeSlot,
       notes,
     });
 
@@ -20,11 +22,12 @@ router.post('/', authMiddleware, async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
-
-// List all sessions for logged-in user (GET)
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    const sessions = await TherapySession.find({ user: req.user.id }).sort({ date: -1 });
+    const sessions = await TherapySession.find({ user: req.user.id })
+      .populate('therapist', 'name specialization')
+      .sort({ date: -1 });
+
     res.json(sessions);
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });

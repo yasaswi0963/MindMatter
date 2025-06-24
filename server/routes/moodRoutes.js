@@ -6,22 +6,24 @@ const authMiddleware = require('../middleware/authMiddleware');
 // @route   POST /api/mood
 // @desc    Create a new mood entry
 // @access  Private
+// Create mood entry
 router.post('/', authMiddleware, async (req, res) => {
   try {
-    const { mood, description } = req.body;
-
+    const { mood, intensity, note, trigger } = req.body;
     const newMood = new Mood({
-      user: req.user.id,
       mood,
-      description,
+      intensity,
+      note,
+      trigger,
+      user: req.user.id
     });
-
-    const savedMood = await newMood.save();
-    res.status(201).json(savedMood);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    await newMood.save();
+    res.json(newMood);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
   }
 });
+
 
 // @route   GET /api/mood
 // @desc    Get all moods for the logged-in user
