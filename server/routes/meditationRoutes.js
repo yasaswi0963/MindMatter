@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 const Meditation = require('../models/Meditation');
 const UserMeditationProgress = require('../models/UserMeditationProgress');
-const auth = require('../middleware/auth');
+
+const authMiddleware = require('../middleware/authMiddleware');
 
 // GET all meditations
 router.get('/', async (req, res) => {
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST mark as completed
-router.post('/complete/:id', auth, async (req, res) => {
+router.post('/complete/:id', authMiddleware, async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
 
@@ -28,7 +29,7 @@ router.post('/complete/:id', auth, async (req, res) => {
 });
 
 // POST save meditation
-router.post('/save/:id', auth, async (req, res) => {
+router.post('/save/:id', authMiddleware, async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
 
@@ -44,7 +45,7 @@ router.post('/save/:id', auth, async (req, res) => {
 });
 
 // GET progress
-router.get('/progress', auth, async (req, res) => {
+router.get('/progress', authMiddleware, async (req, res) => {
   const userId = req.user._id;
   const progress = await UserMeditationProgress.findOne({ userId })
     .populate('completedMeditations')
