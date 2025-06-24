@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Meditation from "./pages/Meditation";
 import Mood from "./pages/Mood";
+import TherapyBooking from './pages/TherapyBooking';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/meditation" element={<ProtectedRoute><Meditation /></ProtectedRoute>} />
       <Route path="/mood" element={<ProtectedRoute><Mood /></ProtectedRoute>} />
+      <Route path="/book-therapy" element={<ProtectedRoute><TherapyBooking /></ProtectedRoute>} />
 
       <Route
         path="/forum"
